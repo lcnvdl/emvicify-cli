@@ -4,9 +4,21 @@ Scaffolding tool for Emvicify
 ## Installation
 You can install the package from npm.
 ```bash
-npm i --global @emvicify/cli
+npm i --g @emvicify/cli
 ```
 
 ## Usage
+```bash
+mvcfy --help
+```
+or
+```bash
+emvicify --help
+```
 
-TODO
+### Create a new controller
+```bash
+mvcfy make:controller Users
+```
+
+
