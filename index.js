@@ -2,7 +2,7 @@
 
 const program = require("commander");
 const { version, description } = require("./package.json");
-const { makeController, makeRouter, makeMiddleware } = require("./src/commands");
+const { makeController, makeRouter, makeMiddleware, makeService } = require("./src/commands");
 
 program
     .version(version)
@@ -25,6 +25,13 @@ program
     .alias("am")
     .description("Adds a new middleware")
     .action(name => makeMiddleware(name));
+
+
+program
+    .command("add:service <name>")
+    .alias("as")
+    .description("Adds a new service")
+    .action(name => makeService(name));
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();

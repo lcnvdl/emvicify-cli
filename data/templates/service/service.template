@@ -1,0 +1,9 @@
+const { BaseService } = require("emvicify/services");
+
+class {{ className }}Service extends BaseService {
+    constructor({ services }) {
+        super({ services });
+    }
+}
+
+module.exports = {{ className }}Service;

@@ -3,37 +3,37 @@ const path = require("path");
 const fs = require("fs");
 const colog = require("colog");
 
-class MakeRouterCommand extends FileCommand {
+class MakeServiceCommand extends FileCommand {
 
     get currentDir() {
         return __dirname;
     }
 
     get templateFolder() {
-        return "router";
+        return "service";
     }
 
     get templateName() {
-        return "router";
+        return "service";
     }
 
     get outDirFolderName() {
-        return "routers";
+        return "services";
     }
 
     run(name) {
         const outDir = this.getOutDir(name);
         const fileName = this.toSnakeCase(name);
         const className = this.toCamelCase(name, true);
-    
-        const finalPath = path.join(outDir, fileName + ".router.js");
-    
+
+        const finalPath = path.join(outDir, fileName + ".service.js");
+
         this.template.setData("className", className);
-    
+
         fs.writeFileSync(finalPath, this.template.render(), "utf-8");
-    
-        colog.success("Router " + className + " created");
+
+        colog.success("Service " + className + " created");
     }
 }
 
-module.exports = name => (new MakeRouterCommand()).run(name);
+module.exports = name => (new MakeServiceCommand()).run(name);

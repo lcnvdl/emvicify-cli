@@ -22,7 +22,7 @@ class MakeMiddlewareCommand extends FileCommand {
     }
 
     run(name) {
-        const outDir = this.getOutDir();
+        const outDir = this.getOutDir(name);
         const fileName = this.toSnakeCase(name);
         const className = this.toCamelCase(name, true);
     

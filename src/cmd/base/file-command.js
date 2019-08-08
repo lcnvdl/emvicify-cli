@@ -38,18 +38,39 @@ class FileCommand extends AbstractCommand {
         return this._template || (this._template = new Template({ path: this.templatePath }));
     }
 
-    getOutDir() {
-        const dir = path.join(process.cwd(), "app", this.outDirFolderName);
+    getOutDir(name) {
+
+        let pathInName;
+
+        if (name.indexOf("/") !== -1) {
+            let folders = name.split("/");
+            folders.pop();
+            pathInName = path.join(...folders);
+        }
+        else {
+            pathInName = ".";
+        }
+
+        const dir = path.join(process.cwd(), "app", this.outDirFolderName, pathInName);
         fs.mkdirSync(dir, { recursive: true });
         return dir;
     }
 
     toSnakeCase(name) {
-        return snakeCase(name).split("_").join("-");
+        return snakeCase(extractName(name)).split("_").join("-");
     }
 
     toCamelCase(name, upperCase) {
-        return camelCase(name, { pascalCase: upperCase });
+        return camelCase(extractName(name), { pascalCase: upperCase });
+    }
+}
+
+function extractName(name) {
+    if (name.indexOf("/") !== -1) {
+        return name.substr(name.lastIndexOf("/") + 1);
+    }
+    else {
+        return name;
     }
 }
 

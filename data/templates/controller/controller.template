@@ -1,6 +1,9 @@
 const { BaseController } = require("emvicify/controllers");
 
 class {{ className }}Controller extends BaseController {
+    constructor({ services }) {
+        super({ services });
+    }
 }
 
 module.exports = {{ className }}Controller;
