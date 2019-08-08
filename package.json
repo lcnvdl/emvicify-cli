@@ -3,8 +3,11 @@
   "version": "0.0.1",
   "description": "CLI for Emvicify Framework",
   "preferGlobal": true,
-  "main": "emvicify.js",
-  "bin": "./emvicify.js",
+  "main": "index.js",
+  "bin": {
+    "emvicify": "./index.js",
+    "mvcfy": "./index.js"
+  },
   "scripts": {
     "test": "mocha"
   },
