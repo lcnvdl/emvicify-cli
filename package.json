@@ -33,5 +33,8 @@
     "inquirer": "^6.5.0",
     "snake-case": "^2.1.0",
     "tangular": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0"
   }
 }
