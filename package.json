@@ -1,0 +1,34 @@
+{
+  "name": "@emvicify/cli",
+  "version": "0.0.1",
+  "description": "CLI for Emvicify Framework",
+  "preferGlobal": true,
+  "main": "emvicify.js",
+  "bin": "./emvicify.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lcnvdl/emvicify-cli.git"
+  },
+  "keywords": [
+    "emvicify",
+    "cli",
+    "mvc"
+  ],
+  "author": "lcnvdl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lcnvdl/emvicify-cli/issues"
+  },
+  "homepage": "https://github.com/lcnvdl/emvicify-cli#readme",
+  "dependencies": {
+    "camelcase": "^5.3.1",
+    "colog": "^1.0.4",
+    "commander": "^2.20.0",
+    "inquirer": "^6.5.0",
+    "snake-case": "^2.1.0",
+    "tangular": "^2.0.1"
+  }
+}
