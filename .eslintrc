@@ -38,7 +38,7 @@
     "no-unneeded-ternary": "error",
     "no-mixed-operators": "error",
     "no-else-return": "error",
-    "indent": ["error", 2, { "SwitchCase": 1, "ignoreComments": true }],
+    "indent": ["error", 4, { "SwitchCase": 1, "ignoreComments": true }],
     "no-multiple-empty-lines": "error",
     "max-len": ["error", { "code": 200 }],
     "comma-style": ["error", "last"],

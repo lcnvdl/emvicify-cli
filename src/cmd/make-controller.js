@@ -11,19 +11,19 @@ let lazy;
 
 module.exports = (name) => {
 
-  const getTemplate = () => lazy || (lazy = new Template({ path: templatePath }));
-  const tpl = getTemplate();
-  const fileName = snakeCase(name).split("_").join("-");
-  const className = camelCase(name, { pascalCase: true });
+    const getTemplate = () => lazy || (lazy = new Template({ path: templatePath }));
+    const tpl = getTemplate();
+    const fileName = snakeCase(name).split("_").join("-");
+    const className = camelCase(name, { pascalCase: true });
 
-  const dir = path.join(process.cwd(), "app", "controllers");
-  fs.mkdirSync(dir, { recursive: true });
+    const dir = path.join(process.cwd(), "app", "controllers");
+    fs.mkdirSync(dir, { recursive: true });
 
-  const finalPath = path.join(dir, fileName + ".controller.js");
+    const finalPath = path.join(dir, fileName + ".controller.js");
 
-  tpl.setData("className", className);
+    tpl.setData("className", className);
 
-  fs.writeFileSync(finalPath, tpl.render(), "utf-8");
+    fs.writeFileSync(finalPath, tpl.render(), "utf-8");
 
-  colog.success("Controller " + className + " created");
+    colog.success("Controller " + className + " created");
 };

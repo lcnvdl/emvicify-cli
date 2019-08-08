@@ -1,0 +1,9 @@
+const { BaseRouter } = require("emvicify/routers");
+
+class {{ className }}Router extends BaseRouter {
+  register(app) {
+    // app.get("/", (req, res) => this.controllers.{{ className | decapitalize }}.getList({ req, res }));
+  }
+}
+
+module.exports = {{ className }}Router;

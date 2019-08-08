@@ -9,7 +9,9 @@
     "mvcfy": "./index.js"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint *.js && eslint **/*.js",
+    "lint:fix": "eslint *.js --fix && eslint **/*.js --fix"
   },
   "repository": {
     "type": "git",
