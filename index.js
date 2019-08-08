@@ -2,17 +2,29 @@
 
 const program = require("commander");
 const { version, description } = require("./package.json");
-const { makeController } = require("./src/commands");
+const { makeController, makeRouter, makeMiddleware } = require("./src/commands");
 
 program
     .version(version)
     .description(description);
 
 program
-    .command("make:controller <name>")
-    .alias("mc")
-    .description("Adds a controller")
-    .action((name) => makeController(name));
+    .command("add:controller <name>")
+    .alias("ac")
+    .description("Adds a new controller")
+    .action(name => makeController(name));
+
+program
+    .command("add:router <name>")
+    .alias("ar")
+    .description("Adds a new router")
+    .action(name => makeRouter(name));
+
+program
+    .command("add:middelware <name>")
+    .alias("am")
+    .description("Adds a new middleware")
+    .action(name => makeMiddleware(name));
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();

@@ -1,0 +1,11 @@
+const BaseMiddleware = require("./base/base-middleware");
+
+class {{ className }}Middleware extends BaseMiddleware {
+    generate() {
+        return function (req, res, next) {
+            next();
+        };
+    }
+}
+
+module.exports = {{ className }}Middleware;
