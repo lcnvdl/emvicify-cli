@@ -12,6 +12,10 @@ npm i --g @emvicify/cli
 
 ## Usage
 ```bash
+mfy --help
+```
+or
+```bash
 mvcfy --help
 ```
 or
@@ -19,9 +23,40 @@ or
 emvicify --help
 ```
 
-### Create a new controller
+## Getting started
+1. Run the command in your NPM Project folder
 ```bash
-mvcfy make:controller Users
+mfy here
+```
+2. Follow the wizard
+3. Ready! Just use it :)
+
+### Examples
+> Add a new controller
+```bash
+mfy add:controller Users
+```
+or
+```bash
+mfy ac Users
+```
+
+> Add a new router
+```bash
+mfy add:router Auth
+```
+or
+```bash
+mfy ar Auth
+```
+
+> Add a new middleware
+```bash
+mfy add:middleware Authenticated
+```
+or
+```bash
+mfy am Authenticated
 ```
 
 [npm-image]: https://img.shields.io/npm/v/@emvicify/cli.svg?style=flat-square
