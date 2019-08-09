@@ -20,7 +20,7 @@ async function addIndexJs() {
         colog.warning(" * Index.js already exists. File skipped.");
     }
     else {
-        fs.copyFileSync(templatePath, dest);
+        fs.copyFileSync(templatePath, destPath);
     }
 }
 
