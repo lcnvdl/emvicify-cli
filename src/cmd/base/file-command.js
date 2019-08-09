@@ -1,5 +1,5 @@
 const AbstractCommand = require("./abstract-command");
-const Template =require("../../templates/template");
+const Template = require("../../templates/template");
 const path = require("path");
 const snakeCase = require("snake-case");
 const camelCase = require("camelcase");

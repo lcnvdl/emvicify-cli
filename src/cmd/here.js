@@ -3,6 +3,43 @@ const { asyncForEach } = require("../helpers/async.helper");
 const colog = require("colog");
 const inquirer = require('inquirer');
 const { present, goodbye } = require("../helpers/ux.helper");
+const fs = require("fs");
+const path = require("path");
+const process = require("process");
+const Template = require("../../templates/template");
+
+const templatesFolder = path.join(__dirname, "../../data/templates");
+
+async function addIndexJs() {
+    colog.log("Creating Index.js...");
+
+    const templatePath = path.join(templatesFolder, "core/index.template");
+    const destPath = path.join(process.cwd(), "index.js");
+
+    if (fs.existsSync(destPath)) {
+        colog.warn("Index.js already exists. File skipped.");
+    }
+    else {
+        fs.copyFileSync(templatePath, dest);
+    }
+}
+
+async function addSettingsJson() {
+    colog.log("Creating Settings.json...");
+
+    const templatePath = path.join(templatesFolder, "core/settings.template");
+    const destPath = path.join(process.cwd(), "settings.json");
+
+    if (fs.existsSync(destPath)) {
+        colog.warn("Settings.json already exists. File skipped.");
+    }
+    else {
+        const template = new Template({ path: templatePath });
+        template.setData("port", 3500);
+    
+        fs.writeFileSync(destPath, template.render(), "utf-8");
+    }
+}
 
 async function promptExtraPackages() {
     const dependencies = [
@@ -49,22 +86,24 @@ async function promptExtraPackages() {
             });
         }
 
-        try {
-            for (let i = 0; i < tasks.length; i++) {
-                colog.log(tasks[i].message);
-                await tasks[i].fn();
-            }
-            colog.success("Emvicify is here!");
-        }
-        catch (err) {
-            colog.error(err);
+        for (let i = 0; i < tasks.length; i++) {
+            colog.log(tasks[i].message);
+            await tasks[i].fn();
         }
     });
-
 }
 
 module.exports = async () => {
     present("Setup emvicify");
 
-    await promptExtraPackages();
+    try {
+        await promptExtraPackages();
+        await addIndexJs();
+        await addSettingsJson();
+
+        goodbye("Emvicify is here!");
+    }
+    catch (err) {
+        colog.error(err);
+    }
 };
