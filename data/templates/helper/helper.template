@@ -1,0 +1,4 @@
+class {{ className }}Helper {
+}
+
+module.exports = {{ className }}Helper;

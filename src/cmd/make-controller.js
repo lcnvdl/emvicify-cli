@@ -1,7 +1,7 @@
 const FileCommand = require("./base/file-command");
 const path = require("path");
 const fs = require("fs");
-const colog = require("colog");
+const { present, goodbye } = require("../helpers/ux.helper");
 
 class MakeControllerCommand extends FileCommand {
 
@@ -22,6 +22,8 @@ class MakeControllerCommand extends FileCommand {
     }
 
     run(name) {
+        present("Add controller " + name);
+
         const outDir = this.getOutDir(name);
         const fileName = this.toSnakeCase(name);
         const className = this.toCamelCase(name, true);
@@ -32,7 +34,7 @@ class MakeControllerCommand extends FileCommand {
     
         fs.writeFileSync(finalPath, this.template.render(), "utf-8");
     
-        colog.success("Controller " + className + " created");
+        goodbye("Controller " + className + " created");
     }
 }
 

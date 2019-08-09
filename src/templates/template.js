@@ -1,6 +1,6 @@
 const Tangular = require("tangular");
 const fs = require("fs");
-const fsPromises = fs.promises;
+//const fsPromises = fs.promises;
 const { capitalize, decapitalize } = require("./pipes");
 
 Tangular.register("capitalize", capitalize);
@@ -20,9 +20,9 @@ class Template {
         return !!this.content;
     }
 
-    async load(path) {
+    /*async load(path) {
         this.content = await fsPromises.readFile(path, "utf-8");
-    }
+    }*/
 
     loadSync(path) {
         this.content = fs.readFileSync(path, "utf-8");

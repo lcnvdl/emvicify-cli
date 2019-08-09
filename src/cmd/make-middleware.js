@@ -1,7 +1,7 @@
 const FileCommand = require("./base/file-command");
 const path = require("path");
 const fs = require("fs");
-const colog = require("colog");
+const { present, goodbye } = require("../helpers/ux.helper");
 
 class MakeMiddlewareCommand extends FileCommand {
 
@@ -22,6 +22,8 @@ class MakeMiddlewareCommand extends FileCommand {
     }
 
     run(name) {
+        present("Add middleware " + name);
+
         const outDir = this.getOutDir(name);
         const fileName = this.toSnakeCase(name);
         const className = this.toCamelCase(name, true);
@@ -32,7 +34,7 @@ class MakeMiddlewareCommand extends FileCommand {
     
         fs.writeFileSync(finalPath, this.template.render(), "utf-8");
     
-        colog.success("Middleware " + className + " created");
+        goodbye("Middleware " + className + " created");
     }
 }
 
