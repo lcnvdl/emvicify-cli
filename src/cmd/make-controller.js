@@ -1,29 +1,39 @@
-const colog = require("colog");
-const process = require("process");
+const FileCommand = require("./base/file-command");
 const path = require("path");
 const fs = require("fs");
-const snakeCase = require("snake-case");
-const camelCase = require("camelcase");
-const Template = require("../templates/template");
-const templatePath = path.join(__dirname, "../../data/templates/controller/controller.template");
+const colog = require("colog");
 
-let lazy;
+class MakeControllerCommand extends FileCommand {
 
-module.exports = (name) => {
+    get currentDir() {
+        return __dirname;
+    }
 
-    const getTemplate = () => lazy || (lazy = new Template({ path: templatePath }));
-    const tpl = getTemplate();
-    const fileName = snakeCase(name).split("_").join("-");
-    const className = camelCase(name, { pascalCase: true });
+    get templateFolder() {
+        return "controller";
+    }
 
-    const dir = path.join(process.cwd(), "app", "controllers");
-    fs.mkdirSync(dir, { recursive: true });
+    get templateName() {
+        return "controller";
+    }
 
-    const finalPath = path.join(dir, fileName + ".controller.js");
+    get outDirFolderName() {
+        return "controllers";
+    }
 
-    tpl.setData("className", className);
+    run(name) {
+        const outDir = this.getOutDir(name);
+        const fileName = this.toSnakeCase(name);
+        const className = this.toCamelCase(name, true);
+    
+        const finalPath = path.join(outDir, fileName + ".controller.js");
+    
+        this.template.setData("className", className);
+    
+        fs.writeFileSync(finalPath, this.template.render(), "utf-8");
+    
+        colog.success("Controller " + className + " created");
+    }
+}
 
-    fs.writeFileSync(finalPath, tpl.render(), "utf-8");
-
-    colog.success("Controller " + className + " created");
-};
+module.exports = name => (new MakeControllerCommand()).run(name);
