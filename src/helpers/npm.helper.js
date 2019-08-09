@@ -17,10 +17,10 @@ module.exports = {
             }
         }
 
-        const { stdout, stderr } = await exec(cmd);
+        let { stdout, stderr } = await exec(cmd);
 
         if (stderr && stderr !== "") {
-            let hasErrors = stderr.split("\n").map(m => m.trim()).some(m => m.indexOf("npm WARN") === -1);
+            let hasErrors = stderr.split("\n").map(m => m.trim()).some(m => m && m !== "" && m.indexOf("npm WARN") === -1);
             if (!hasErrors) {
                 stderr = "";
             }

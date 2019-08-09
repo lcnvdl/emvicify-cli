@@ -50,7 +50,7 @@ async function promptExtraPackages() {
             name: "Socket.io driver"
         }
     ];
-
+    
     await inquirer.prompt([
         {
             type: "checkbox",
