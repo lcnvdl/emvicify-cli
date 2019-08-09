@@ -17,26 +17,28 @@ async function addIndexJs() {
     const destPath = path.join(process.cwd(), "index.js");
 
     if (fs.existsSync(destPath)) {
-        colog.warn("Index.js already exists. File skipped.");
+        colog.warning(" * Index.js already exists. File skipped.");
     }
     else {
         fs.copyFileSync(templatePath, dest);
     }
 }
 
-async function addSettingsJson() {
+async function addSettingsJson(port) {
     colog.log("Creating Settings.json...");
 
     const templatePath = path.join(templatesFolder, "core/settings.template");
     const destPath = path.join(process.cwd(), "settings.json");
 
     if (fs.existsSync(destPath)) {
-        colog.warn("Settings.json already exists. File skipped.");
+        colog.warning(" * Settings.json already exists. File skipped.");
     }
     else {
         const template = new Template({ path: templatePath });
-        template.setData("port", 3500);
-    
+        template.setData("port", port);
+
+        colog.log(" * Port: " + port);
+
         fs.writeFileSync(destPath, template.render(), "utf-8");
     }
 }
@@ -49,7 +51,7 @@ async function promptExtraPackages() {
         }
     ];
 
-    inquirer.prompt([
+    await inquirer.prompt([
         {
             type: "checkbox",
             name: "dependencies",
@@ -93,13 +95,13 @@ async function promptExtraPackages() {
     });
 }
 
-module.exports = async () => {
+module.exports = async (cmdObj) => {
     present("Setup emvicify");
 
     try {
         await promptExtraPackages();
         await addIndexJs();
-        await addSettingsJson();
+        await addSettingsJson(cmdObj.port || 3500);
 
         goodbye("Emvicify is here!");
     }

@@ -14,8 +14,9 @@ program
 
 program
     .command("here")
+    .option("-p, --port <port>", "Application Port", 3500)
     .description("Installs emvicify in the current project")
-    .action(name => here(name));
+    .action(cmdObj => here(cmdObj));
 
 program
     .command("add:controller <name>")
@@ -35,7 +36,6 @@ program
     .description("Adds a new middleware")
     .action(name => makeMiddleware(name));
 
-
 program
     .command("add:service <name>")
     .alias("as")
@@ -49,5 +49,3 @@ if (!process.argv.slice(2).length) {
 }
 
 program.parse(process.argv);
-
-colog.log(" ");
