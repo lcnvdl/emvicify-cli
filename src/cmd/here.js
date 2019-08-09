@@ -6,7 +6,7 @@ const { present, goodbye } = require("../helpers/ux.helper");
 const fs = require("fs");
 const path = require("path");
 const process = require("process");
-const Template = require("../../templates/template");
+const Template = require("../templates/template");
 
 const templatesFolder = path.join(__dirname, "../../data/templates");
 
