@@ -2,6 +2,7 @@ const Tangular = require("tangular");
 const fs = require("fs");
 //const fsPromises = fs.promises;
 const { capitalize, decapitalize } = require("./pipes");
+const renderer = require("./js-template-renderer");
 
 Tangular.register("capitalize", capitalize);
 Tangular.register("decapitalize", decapitalize);
@@ -20,10 +21,6 @@ class Template {
         return !!this.content;
     }
 
-    /*async load(path) {
-        this.content = await fsPromises.readFile(path, "utf-8");
-    }*/
-
     loadSync(path) {
         this.content = fs.readFileSync(path, "utf-8");
     }
@@ -32,8 +29,13 @@ class Template {
         this.data[key] = value;
     }
 
-    render() {
-        return Tangular.render(this.content, this.data);
+    render(isJs) {
+        if (isJs) {
+            return renderer.render(this.content, this.data);
+        }
+        else {
+            return Tangular.render(this.content, this.data);
+        }
     }
 }
 
