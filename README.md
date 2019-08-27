@@ -16,10 +16,6 @@ mfy --help
 ```
 or
 ```bash
-mvcfy --help
-```
-or
-```bash
 emvicify --help
 ```
 
