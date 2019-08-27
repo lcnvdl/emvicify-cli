@@ -1,4 +1,4 @@
-const BaseMiddleware = require("./base/base-middleware");
+const { BaseMiddleware } = require("emvicify/middlewares");
 
 class {{ className }}Middleware extends BaseMiddleware {
     generate() {
