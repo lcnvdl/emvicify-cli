@@ -1,6 +1,10 @@
 const { BaseMiddleware } = require("emvicify/middlewares");
 
 class {{ className }}Middleware extends BaseMiddleware {
+    constructor({ services }) {
+        super({ services });
+    }
+    
     generate() {
         return function (req, res, next) {
             next();
