@@ -6,7 +6,7 @@ class {{ className }}Middleware extends {{ baseMiddleware }} {
     }{{ if withOverrides }}
     
     get authenticationService() {
-        return super.authenticationService();
+        return super.authenticationService;
     }
 
     processForService(authString) {
