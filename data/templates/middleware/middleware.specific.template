@@ -6,15 +6,15 @@ class {{ className }}Middleware extends {{ baseMiddleware }} {
     }{{ if withOverrides }}
     
     get authenticationService() {
-        return base.authenticationService();
+        return super.authenticationService();
     }
 
     processForService(authString) {
-        return base.processForService(authString);
+        return super.processForService(authString);
     }
 
     generate() {
-        return base.generate();
+        return super.generate();
     }{{fi}}
 }
 
