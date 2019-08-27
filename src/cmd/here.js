@@ -95,10 +95,18 @@ async function promptExtraPackages() {
     });
 }
 
+function preValidate() {
+    if (!fs.existsSync("./package.json")) {
+        throw new Error("Emvicify can only exists in a project with a package.json");
+    }
+}
+
 module.exports = async (cmdObj) => {
     present("Setup emvicify");
 
     try {
+        preValidate();
+
         await promptExtraPackages();
         await addIndexJs();
         await addSettingsJson(cmdObj.port || 3500);

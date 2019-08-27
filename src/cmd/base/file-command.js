@@ -30,12 +30,20 @@ class FileCommand extends AbstractCommand {
     }
 
     get templatePath() {
-        const templatePath = path.join(this.currentDir, "../../data/templates", this.templateFolder, this.templateName + ".template");
-        return templatePath;
+        return this.getTemplatePathFromName(this.templateName);
     }
 
     get template() {
-        return this._template || (this._template = new Template({ path: this.templatePath }));
+        return this._template || (this._template = this.getTemplate(this.templatePath));
+    }
+
+    getTemplate(path) {
+        return new Template({ path });
+    }
+
+    getTemplatePathFromName(name) {
+        const templatePath = path.join(this.currentDir, "../../data/templates", this.templateFolder, name + ".template");
+        return templatePath;
     }
 
     getOutDir(name) {

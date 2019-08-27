@@ -14,6 +14,7 @@ program
 
 program
     .command("here")
+    .alias("init")
     .option("-p, --port <port>", "Application Port", 3500)
     .description("Installs emvicify in the current project")
     .action(cmdObj => here(cmdObj));
@@ -31,10 +32,12 @@ program
     .action(name => makeRouter(name));
 
 program
-    .command("add:middelware <name>")
+    .command("add:middleware <name>")
     .alias("am")
     .description("Adds a new middleware")
-    .action(name => makeMiddleware(name));
+    .option("-a, --authentication <name>", "Authentication middleware. Options: service, basic, jwt.")
+    .option("-w, --with-overrides", "Overrides all parent methods. It works with --authentication option.")
+    .action((name, cmdObj) => makeMiddleware(name, cmdObj));
 
 program
     .command("add:service <name>")
