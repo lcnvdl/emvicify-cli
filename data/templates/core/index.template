@@ -1,6 +1,6 @@
 const { start } = require("emvicify");
 const settingsFile = require("./settings.json");
-const expressSettings = {{ expressSettings }};
+const expressSettings = {{ expressSettings | raw }};
 
 start(__dirname, settings.port, { settingsFile, expressSettings }).then(() => {
     console.log(`Listening on port ${settings.port}`);
