@@ -13,9 +13,6 @@ npm i --g @emvicify/cli
 ## Usage
 ```bash
 mfy --help
-```
-or
-```bash
 emvicify --help
 ```
 
