@@ -25,7 +25,7 @@ mfy here
 3. Ready! Just use it :)
 
 ### Examples
-> Add a new controller *it'll create UsersController.js*
+> Add a new controller *- it'll create UsersController.js*
 ```bash
 mfy add:controller Users
 
