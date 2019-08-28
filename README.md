@@ -25,7 +25,7 @@ mfy here
 3. Ready! Just use it :)
 
 ### Examples
-> Add a new controller *- it'll create UsersController.js*
+> Add a new controller *- it'll create an UsersController class*
 ```bash
 mfy add:controller Users
 
@@ -34,7 +34,7 @@ or
 mfy ac Users
 ```
 
-> Add a new router
+> Add a new router *- it'll create an AuthRouter class*
 ```bash
 mfy add:router Auth
 
@@ -43,7 +43,7 @@ or
 mfy ar Auth
 ```
 
-> Add a new service
+> Add a new service *- it'll create an UsersManagementService class*
 ```bash
 mfy add:service UsersManagement
 
@@ -52,13 +52,18 @@ or
 mfy as UsersManagement
 ```
 
-> Add a new middleware
+> Add a new empty middleware *- it'll create an AuthMiddleware class*
 ```bash
-mfy add:middleware Authenticated
+mfy add:middleware Auth
 
 or
 
-mfy am Authenticated
+mfy am Auth
+```
+
+> Add a new [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) middleware *(overriding all virtual methods for you to use it)*
+```bash
+mfy am --authentication basic --with-overrides Auth
 ```
 
 [npm-image]: https://img.shields.io/npm/v/@emvicify/cli.svg?style=flat-square
