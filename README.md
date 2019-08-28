@@ -28,30 +28,31 @@ mfy here
 3. Ready! Just use it :)
 
 ### Examples
-> Add a new controller
+> Add a new controller *it'll create UsersController.js*
 ```bash
 mfy add:controller Users
-```
 or
-```bash
 mfy ac Users
 ```
 
 > Add a new router
 ```bash
 mfy add:router Auth
-```
 or
-```bash
 mfy ar Auth
+```
+
+> Add a new service
+```bash
+mfy add:service UsersManagement
+or
+mfy as UsersManagement
 ```
 
 > Add a new middleware
 ```bash
 mfy add:middleware Authenticated
-```
 or
-```bash
 mfy am Authenticated
 ```
 
