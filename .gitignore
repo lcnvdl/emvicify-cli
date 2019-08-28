@@ -8,6 +8,7 @@ yarn-error.log*
 # EMVICIFY TEST DATA
 app
 settings.json
+index-alt.js
 
 # Vs Code
 .vscode

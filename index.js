@@ -6,6 +6,17 @@ const { logo } = require("./src/helpers/ux.helper");
 const { version, description } = require("./package.json");
 const { here, makeController, makeRouter, makeMiddleware, makeService } = require("./src/commands");
 
+function parseED(v) {
+    if (v === "enabled") {
+        return true;
+    }
+    else if (v === "disabled") {
+        return false;
+    }
+
+    return v;
+}
+
 logo();
 
 program
@@ -15,7 +26,11 @@ program
 program
     .command("here")
     .alias("init")
+    .option("--body-parser-json <enabled>", "Enable express json body parser. Options: enabled, disabled, prompt.", parseED, true)
+    .option("--body-parser-raw <enabled>", "Enable express raw body parser. Options: enabled, disabled, prompt.", parseED, "prompt")
+    .option("--body-parser-urlencoded <enabled>", "Enable express urlencoded body parser. Options: enabled, extended, disabled, prompt.", parseED, "prompt")
     .option("-p, --port <port>", "Application Port", 3500)
+    .option("--skip-npm-install")
     .description("Installs emvicify in the current project")
     .action(cmdObj => here(cmdObj));
 

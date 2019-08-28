@@ -1,7 +1,8 @@
 const { start } = require("emvicify");
-const settings = require("./settings.json");
+const settingsFile = require("./settings.json");
+const expressSettings = {{ expressSettings }};
 
-start(__dirname, settings.port, { settingsFile: settings }).then(() => {
+start(__dirname, settings.port, { settingsFile, expressSettings }).then(() => {
     console.log(`Listening on port ${settings.port}`);
 }, err => {
     console.error("Application failed", err);

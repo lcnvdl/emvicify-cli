@@ -32,7 +32,6 @@
     "camelcase": "^5.3.1",
     "colog": "^1.0.4",
     "commander": "^2.20.0",
-    "emvicify": "0.0.9",
     "inquirer": "^6.5.0",
     "snake-case": "^2.1.0",
     "tangular": "^2.0.1"

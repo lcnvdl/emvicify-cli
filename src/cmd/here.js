@@ -10,18 +10,28 @@ const Template = require("../templates/template");
 
 const templatesFolder = path.join(__dirname, "../../data/templates");
 
+let expressSettings = {};
+
+function serializeDict(dict) {
+    let str = [];
+    Object.keys(dict).forEach(key => str.push(`    ${key}: ${JSON.stringify(dict[key])}`));
+    return "{\n" + str.join(",\n") + "\n}";
+}
+
 async function addIndexJs() {
     colog.log("Creating Index.js...");
 
     const templatePath = path.join(templatesFolder, "core/index.template");
-    const destPath = path.join(process.cwd(), "index.js");
+    let destPath = path.join(process.cwd(), "index.js");
 
     if (fs.existsSync(destPath)) {
-        colog.warning(" * Index.js already exists. File skipped.");
+        colog.warning(" * Index.js already exists. Please check the file index-alt.js.");
+        destPath = path.join(process.cwd(), "index-alt.js");
     }
-    else {
-        fs.copyFileSync(templatePath, destPath);
-    }
+
+    let template = new Template({ path: templatePath });
+    template.setData("expressSettings", serializeDict(expressSettings));
+    fs.writeFileSync(destPath, template.render());
 }
 
 async function addSettingsJson(port) {
@@ -43,6 +53,46 @@ async function addSettingsJson(port) {
     }
 }
 
+async function promptExpressSettings({ bodyParserJson = true, bodyParserUrlencoded = "prompt", bodyParserRaw = "prompt" }) {
+    if ([bodyParserJson, bodyParserUrlencoded, bodyParserRaw].indexOf("prompt") === -1) {
+        expressSettings = { bodyParserJson, bodyParserUrlencoded, bodyParserRaw };
+        return;
+    }
+
+    let choises = [];
+
+    choises.push({
+        value: "bodyParserJson",
+        name: "JSON Body Parser",
+        checked: bodyParserJson === true
+    });
+
+    choises.push({
+        value: "bodyParserUrlencoded",
+        name: "Urlencoded Body Parser",
+        checked: bodyParserUrlencoded === true
+    });
+
+    choises.push({
+        value: "bodyParserRaw",
+        name: "Raw Body Parser",
+        checked: bodyParserRaw === true
+    });
+
+    await inquirer.prompt([
+        {
+            type: "checkbox",
+            name: "result",
+            message: "Express.js settings",
+            choices: choises
+        }
+    ]).then(async (answers) => {
+        choises.forEach(choise => {
+            expressSettings[choise.value] = answers.result.indexOf(choise.value) !== -1;
+        });
+    });
+}
+
 async function promptExtraPackages() {
     const dependencies = [
         {
@@ -50,7 +100,7 @@ async function promptExtraPackages() {
             name: "Socket.io driver"
         }
     ];
-    
+
     await inquirer.prompt([
         {
             type: "checkbox",
@@ -107,7 +157,15 @@ module.exports = async (cmdObj) => {
     try {
         preValidate();
 
-        await promptExtraPackages();
+        await promptExpressSettings(cmdObj);
+
+        if (!cmdObj.skipNpmInstall) {
+            await promptExtraPackages();
+        }
+        else {
+            colog.warning("* Npm install skipped");
+        }
+
         await addIndexJs();
         await addSettingsJson(cmdObj.port || 3500);
 
