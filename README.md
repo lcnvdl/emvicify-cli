@@ -4,7 +4,7 @@ Scaffolding tool for Emvicify
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 
-[WIKI](https://github.com/lcnvdl/emvicify-cli/wiki)
+[Wiki](https://github.com/lcnvdl/emvicify-cli/wiki)
 
 ## Installation
 You can install the package from npm.
@@ -27,6 +27,8 @@ mfy here
 3. Ready! Just use it :)
 
 ### Examples
+For the complete command list, please go to the [Wiki - CLI Command List page](https://github.com/lcnvdl/emvicify-cli/wiki/CLI-Commands-List)
+
 > Add a new controller *- it'll create an UsersController class*
 ```bash
 mfy add:controller Users
