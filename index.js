@@ -4,7 +4,8 @@ const colog = require("colog");
 const program = require("commander");
 const { logo } = require("./src/helpers/ux.helper");
 const { version, description } = require("./package.json");
-const { here, makeController, makeRouter, makeMiddleware, makeService } = require("./src/commands");
+const { install, here, makeController, makeRouter, makeMiddleware, makeService } = require("./src/commands");
+const { readPluginsCommands } = require("./src/plugins");
 
 function parseED(v) {
     if (v === "enabled") {
@@ -30,9 +31,16 @@ program
     .option("--body-parser-raw <enabled>", "Enable express raw body parser. Options: enabled, disabled, prompt.", parseED, "prompt")
     .option("--body-parser-urlencoded <enabled>", "Enable express urlencoded body parser. Options: enabled, extended, disabled, prompt.", parseED, "prompt")
     .option("-p, --port <port>", "Application Port", 3500)
-    .option("--skip-npm-install")
+    .option("-s, --skip-npm-install", "Skip npm install")
     .description("Installs emvicify in the current project")
     .action(cmdObj => here(cmdObj));
+
+program
+    .command("install <name> [otherPackages...]")
+    .alias("i")
+    .description("Installs an emvicify plugin")
+    .option("-d, --save-dev", "Save as dev package")
+    .action((name, otherPackages, cmdObj) => install(cmdObj, name, otherPackages, pck => require(pck)));
 
 program
     .command("add:controller <name>")
@@ -59,6 +67,8 @@ program
     .alias("as")
     .description("Adds a new service")
     .action(name => makeService(name));
+
+readPluginsCommands(program);
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();

@@ -7,7 +7,6 @@ const fs = require("fs");
 const path = require("path");
 const process = require("process");
 const Template = require("../templates/template");
-
 const templatesFolder = path.join(__dirname, "../../data/templates");
 
 let expressSettings = {};

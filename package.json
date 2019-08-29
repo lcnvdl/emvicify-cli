@@ -37,6 +37,7 @@
     "tangular": "^2.0.1"
   },
   "devDependencies": {
+    "@emvicify/mongoose": "0.0.1",
     "chai": "^4.2.0",
     "mocha": "^6.2.0"
   }
