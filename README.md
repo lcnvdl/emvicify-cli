@@ -29,7 +29,7 @@ mfy here
 
 Happy coding ;)
 
-## Examples
+## CLI Commands Examples
 For the complete command list, please go to the [Wiki - CLI Command List page](https://github.com/lcnvdl/emvicify-cli/wiki/CLI-Commands-List)
 
 > Add a new controller *- it'll create an UsersController class*
