@@ -13,6 +13,7 @@ npm i --g @emvicify/cli
 ```
 
 ## Usage
+For the complete command list, please go to the [Wiki - CLI Command List page](https://github.com/lcnvdl/emvicify-cli/wiki/CLI-Commands-List)
 ```bash
 mfy --help
 emvicify --help
