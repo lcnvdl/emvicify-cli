@@ -4,6 +4,8 @@ Scaffolding tool for Emvicify
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 
+[WIKI](https://github.com/lcnvdl/emvicify-cli/wiki)
+
 ## Installation
 You can install the package from npm.
 ```bash
