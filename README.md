@@ -25,7 +25,11 @@ emvicify --help
 mfy here
 ```
 2. Follow the wizard
-3. Ready! Just use it :)
+3. (Optional) Power emvicify with its [plugins](https://github.com/lcnvdl/emvicify-cli/wiki/Plugins)
+
+Happy coding ;) 
+
+<img src="https://media.giphy.com/media/7E2sUE4OTJCicIgiur/giphy.gif" width="64" height="64" />
 
 ### Examples
 For the complete command list, please go to the [Wiki - CLI Command List page](https://github.com/lcnvdl/emvicify-cli/wiki/CLI-Commands-List)
