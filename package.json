@@ -1,6 +1,6 @@
 {
   "name": "@emvicify/cli",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "CLI for Emvicify Framework",
   "preferGlobal": true,
   "main": "index.js",
@@ -37,7 +37,7 @@
     "tangular": "^2.0.1"
   },
   "devDependencies": {
-    "@emvicify/mongoose": "0.0.1",
+    "@emvicify/mongoose": "0.0.6",
     "chai": "^4.2.0",
     "mocha": "^6.2.0"
   }

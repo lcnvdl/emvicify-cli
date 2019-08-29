@@ -11,7 +11,7 @@ async function install(package, rq, { saveDev = false }) {
     colog.answer("Installing package " + package + "...");
     
     let save = saveDev ? "save-dev" : "save";
-    let command = `npm i --${save} ${package}`;
+    let command = `npm i --${save} ${package}@latest`;
 
     colog.info(command);
 
