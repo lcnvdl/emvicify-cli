@@ -68,7 +68,7 @@ program
     .description("Adds a new service")
     .action(name => makeService(name));
 
-readPluginsCommands(program, pck => require("./app/plugins/" + pck));
+readPluginsCommands(program);
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();
