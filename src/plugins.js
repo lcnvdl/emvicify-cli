@@ -7,18 +7,23 @@ function readPluginsCommands(program, rq) {
     if (fs.existsSync(pluginsFolder)) {
         let files = fs.readdirSync(pluginsFolder);
         files.filter(file => file.indexOf(".js") !== -1).forEach(file => {
-            let packageName = file.substr(0, file.lastIndexOf("."));
-            packageName = packageName.substr(packageName.lastIndexOf("/") + 1);
+            try {
+                let packageName = file.substr(0, file.lastIndexOf("."));
+                packageName = packageName.substr(packageName.lastIndexOf("/") + 1);
 
-            let PluginClass = rq(packageName).plugin;
-            let instance = new PluginClass();
+                let PluginClass = rq(packageName).plugin;
+                let instance = new PluginClass();
 
-            if (instance.events && instance.events.commands) {
-                instance.events.commands(program);
+                if (instance.events && instance.events.commands) {
+                    instance.events.commands(program);
+                }
+
+                if (instance.events && instance.events.cli) {
+                    instance.events.cli(program);
+                }
             }
-
-            if (instance.events && instance.events.cli) {
-                instance.events.cli(program);
+            catch (err) {
+                console.error("Error reading plugin " + file + ". " + err);
             }
         });
     }

@@ -6,7 +6,7 @@ const fs = require("fs");
 const Template = require("../templates/template");
 const templatesFolder = path.join(__dirname, "../../data/templates");
 
-async function install(package, rq, { saveDev = false }) {
+async function install(package, { saveDev = false }) {
 
     colog.answer("Installing package " + package + "...");
     
@@ -25,11 +25,12 @@ async function install(package, rq, { saveDev = false }) {
         colog.error(stderr);
     }
 
-    installMfyPlugin(package, rq);
+    installMfyPlugin(package);
 }
 
-function installMfyPlugin(package, rq) {
-    const packageJson = path.join(process.cwd(), "node_modules", package, "package.json");
+function installMfyPlugin(package) {
+    const packageDir = path.join(process.cwd(), "node_modules", package);
+    const packageJson = path.join(packageDir, "package.json");
 
     if (fs.existsSync(packageJson)) {
         const json = JSON.parse(fs.readFileSync(packageJson, "utf-8"));
@@ -40,7 +41,7 @@ function installMfyPlugin(package, rq) {
             const pluginsDir = path.join(process.cwd(), "app", "plugins");
             fs.mkdirSync(pluginsDir, { recursive: true });
 
-            const PluginClass = rq(json.name).plugin;
+            const PluginClass = require(path.join(packageDir, "index")).plugin;
             const instance = new PluginClass();
 
             if (instance.events && instance.events.install) {
@@ -61,14 +62,14 @@ function installMfyPlugin(package, rq) {
     }
 }
 
-module.exports = async (options, package, otherPackages, rq) => {
+module.exports = async (options, package, otherPackages) => {
     options = options || {};
 
-    await install(package, rq, options);
+    await install(package, options);
 
     if (otherPackages) {
         for (let i = 0; i < otherPackages.length; i++) {
-            await install(otherPackages[i], rq, options);
+            await install(otherPackages[i], options);
         }
     }
 };

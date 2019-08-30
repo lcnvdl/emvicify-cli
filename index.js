@@ -40,7 +40,7 @@ program
     .alias("i")
     .description("Installs an emvicify plugin")
     .option("-d, --save-dev", "Save as dev package")
-    .action((name, otherPackages, cmdObj) => install(cmdObj, name, otherPackages, pck => require(pck)));
+    .action((name, otherPackages, cmdObj) => install(cmdObj, name, otherPackages));
 
 program
     .command("add:controller <name>")
