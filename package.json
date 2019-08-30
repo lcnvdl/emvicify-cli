@@ -1,6 +1,6 @@
 {
   "name": "@emvicify/cli",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "CLI for Emvicify Framework",
   "preferGlobal": true,
   "main": "index.js",
@@ -11,8 +11,7 @@
   "scripts": {
     "test": "mocha",
     "lint": "eslint *.js && eslint **/*.js",
-    "lint:fix": "eslint *.js --fix && eslint **/*.js --fix",
-    "publish": "npm publish --access public"
+    "lint:fix": "eslint *.js --fix && eslint **/*.js --fix"
   },
   "repository": {
     "type": "git",
@@ -38,7 +37,6 @@
     "tangular": "^2.0.1"
   },
   "devDependencies": {
-    "@emvicify/mongoose": "0.0.6",
     "chai": "^4.2.0",
     "mocha": "^6.2.0"
   }
