@@ -1,7 +1,7 @@
 const { install } = require("../helpers/npm.helper");
 const { asyncForEach } = require("../helpers/async.helper");
 const colog = require("colog");
-const inquirer = require('inquirer');
+const inquirer = require("inquirer");
 const { present, goodbye } = require("../helpers/ux.helper");
 const fs = require("fs");
 const path = require("path");
@@ -17,7 +17,7 @@ function serializeDict(dict) {
     return "{\n" + str.join(",\n") + "\n}";
 }
 
-async function addIndexJs() {
+function addIndexJs() {
     colog.log("Creating Index.js...");
 
     const templatePath = path.join(templatesFolder, "core/index.template");
@@ -33,7 +33,7 @@ async function addIndexJs() {
     fs.writeFileSync(destPath, template.render());
 }
 
-async function addSettingsJson(port) {
+function addSettingsJson(port) {
     colog.log("Creating Settings.json...");
 
     const templatePath = path.join(templatesFolder, "core/settings.template");
@@ -85,7 +85,7 @@ async function promptExpressSettings({ bodyParserJson = true, bodyParserUrlencod
             message: "Express.js settings",
             choices: choises
         }
-    ]).then(async (answers) => {
+    ]).then(answers => {
         choises.forEach(choise => {
             expressSettings[choise.value] = answers.result.indexOf(choise.value) !== -1;
         });
@@ -165,8 +165,8 @@ module.exports = async (cmdObj) => {
             colog.warning("* Npm install skipped");
         }
 
-        await addIndexJs();
-        await addSettingsJson(cmdObj.port || 3500);
+        addIndexJs();
+        addSettingsJson(cmdObj.port || 3500);
 
         goodbye("Emvicify is here!");
     }

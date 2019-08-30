@@ -35,9 +35,9 @@ class MakeMiddlewareCommand extends FileCommand {
         }
 
         const middlewareClasses = {
-            "basic": "BasicServiceAuthenticationMiddleware",
-            "service": "ServiceAuthenticationMiddleware",
-            "jwt": "JwtAuthenticationMiddleware"
+            basic: "BasicServiceAuthenticationMiddleware",
+            service: "ServiceAuthenticationMiddleware",
+            jwt: "JwtAuthenticationMiddleware"
         };
 
         if (!middlewareClasses[authentication]) {

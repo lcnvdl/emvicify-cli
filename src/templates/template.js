@@ -33,15 +33,15 @@ class Template {
         if (isJs) {
             return renderer.render(this.content, this.data);
         }
-        else {
-            let result = Tangular.render(this.content, this.data);
+        
+        let result = Tangular.render(this.content, this.data);
             
-            while(result.indexOf("&quot;") !== -1) {
-                result = result.replace("&quot;", "\"");
-            }
-
-            return result;
+        while(result.indexOf("&quot;") !== -1) {
+            result = result.replace("&quot;", "\"");
         }
+
+        return result;
+        
     }
 }
 

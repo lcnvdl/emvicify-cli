@@ -77,9 +77,9 @@ function extractName(name) {
     if (name.indexOf("/") !== -1) {
         return name.substr(name.lastIndexOf("/") + 1);
     }
-    else {
-        return name;
-    }
+    
+    return name;
+    
 }
 
 module.exports = FileCommand;

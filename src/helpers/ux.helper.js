@@ -15,6 +15,6 @@ module.exports = {
     },
 
     goodbye(message) {
-        colog.success(message)
+        colog.success(message);
     }
 };
