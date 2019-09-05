@@ -1,5 +1,7 @@
 const fs = require("fs");
 const path = require("path");
+const ConsoleLog = require("./plugins/console-log");
+const inquirer = require("inquirer");
 
 function readPluginsCommands(program) {
     const pluginsFolder = path.join(process.cwd(), "app", "plugins");
@@ -14,12 +16,14 @@ function readPluginsCommands(program) {
                 let PluginClass = require(path.join(pluginsFolder, packageName)).plugin;
                 let instance = new PluginClass();
 
+                const consoleLog = new ConsoleLog();
+
                 if (instance.events && instance.events.commands) {
-                    instance.events.commands(program);
+                    instance.events.commands(program, { consoleLog, inquirer });
                 }
 
                 if (instance.events && instance.events.cli) {
-                    instance.events.cli(program);
+                    instance.events.cli(program, { consoleLog, inquirer });
                 }
             }
             catch (err) {
