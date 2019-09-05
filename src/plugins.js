@@ -2,9 +2,15 @@ const fs = require("fs");
 const path = require("path");
 const ConsoleLog = require("./plugins/console-log");
 const inquirer = require("inquirer");
+const { present, goodbye } = require("../src/helpers/ux.helper");
 const classes = {
     AbstractCommand: require("../src/cmd/base/abstract-command"),
     FileCommand: require("../src/cmd/base/file-command")
+};
+
+const methods = {
+    present, 
+    goodbye
 };
 
 function readPluginsCommands(program) {
@@ -23,11 +29,11 @@ function readPluginsCommands(program) {
                 const consoleLog = new ConsoleLog();
 
                 if (instance.events && instance.events.commands) {
-                    instance.events.commands(program, { consoleLog, inquirer, classes });
+                    instance.events.commands(program, { consoleLog, inquirer, classes, methods });
                 }
 
                 if (instance.events && instance.events.cli) {
-                    instance.events.cli(program, { consoleLog, inquirer, classes });
+                    instance.events.cli(program, { consoleLog, inquirer, classes, methods });
                 }
             }
             catch (err) {

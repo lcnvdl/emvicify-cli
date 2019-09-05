@@ -13,6 +13,10 @@ class ConsoleLog {
         colog.success(a);
     }
 
+    warn(a) {
+        this.warning(a);
+    }
+
     warning(a) {
         colog.warning(a);
     }
