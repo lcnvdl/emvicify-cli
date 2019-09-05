@@ -2,6 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const ConsoleLog = require("./plugins/console-log");
 const inquirer = require("inquirer");
+const classes = {
+    AbstractCommand: require("../src/cmd/base/abstract-command"),
+    FileCommand: require("../src/cmd/base/file-command")
+};
 
 function readPluginsCommands(program) {
     const pluginsFolder = path.join(process.cwd(), "app", "plugins");
@@ -19,11 +23,11 @@ function readPluginsCommands(program) {
                 const consoleLog = new ConsoleLog();
 
                 if (instance.events && instance.events.commands) {
-                    instance.events.commands(program, { consoleLog, inquirer });
+                    instance.events.commands(program, { consoleLog, inquirer, classes });
                 }
 
                 if (instance.events && instance.events.cli) {
-                    instance.events.cli(program, { consoleLog, inquirer });
+                    instance.events.cli(program, { consoleLog, inquirer, classes });
                 }
             }
             catch (err) {
