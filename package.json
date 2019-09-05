@@ -1,6 +1,6 @@
 {
   "name": "@emvicify/cli",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "CLI for Emvicify Framework",
   "preferGlobal": true,
   "main": "index.js",
