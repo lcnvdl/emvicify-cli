@@ -114,9 +114,7 @@ async function promptExtraPackages() {
                 message: "Installing Emvicify...",
                 fn: async () => {
                     let { stderr } = await install("emvicify", true);
-                    if (stderr && stderr !== "") {
-                        throw stderr;
-                    }
+                    processNpmStderr(stderr);
                 }
             }
         ];
@@ -130,9 +128,7 @@ async function promptExtraPackages() {
                     colog.log(colog.colorYellow(" * Installing " + package + "..."));
 
                     let { stderr } = await install(package, true);
-                    if (stderr) {
-                        throw stderr;
-                    }
+                    processNpmStderr(stderr);
                 })
             });
         }
@@ -142,6 +138,12 @@ async function promptExtraPackages() {
             await tasks[i].fn();
         }
     });
+}
+
+function processNpmStderr(stderr) {
+    if (stderr && stderr !== "") {
+        throw stderr;
+    }
 }
 
 function preValidate() {

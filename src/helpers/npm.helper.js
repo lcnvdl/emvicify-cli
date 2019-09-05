@@ -8,7 +8,7 @@ module.exports = {
             throw new Error("Invalid package name");
         }
 
-        let cmd = "npm i " + package;
+        let cmd = "npm i --loglevel=error " + package;
 
         if (save) {
             cmd += " --save";
