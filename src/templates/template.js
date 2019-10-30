@@ -1,6 +1,5 @@
 const Tangular = require("tangular");
 const fs = require("fs");
-//const fsPromises = fs.promises;
 const { capitalize, decapitalize } = require("./pipes");
 const renderer = require("./js-template-renderer");
 
@@ -8,9 +7,10 @@ Tangular.register("capitalize", capitalize);
 Tangular.register("decapitalize", decapitalize);
 
 class Template {
-    constructor({ path = null, content = null, data = {} }) {
+    constructor({ path = null, content = null, data = {}, isJs = false }) {
         this.content = content;
         this.data = data;
+        this.isJs = isJs;
 
         if (path) {
             this.loadSync(path);
@@ -29,8 +29,10 @@ class Template {
         this.data[key] = value;
     }
 
-    render(isJs) {
-        if (isJs) {
+    render(renderAsJs) {
+        renderAsJs = (typeof renderAsJs !== 'undefined') ? renderAsJs : this.isJs;
+
+        if (renderAsJs) {
             return renderer.render(this.content, this.data);
         }
         

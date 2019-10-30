@@ -38,11 +38,23 @@ class FileCommand extends AbstractCommand {
     }
 
     getTemplate(path) {
-        return new Template({ path });
+        const isJs = (path.indexOf(".js") !== -1);
+        return new Template({ path, isJs });
     }
 
     getTemplatePathFromName(name) {
         const templatePath = path.join(this.currentDir, "../../data/templates", this.templateFolder, name + ".template");
+
+        if (!fs.existsSync(templatePath)) {
+            let newTemplatePath = templatePath + ".js";
+
+            if (!fs.existsSync(newTemplatePath)) {
+                throw new Error(`Template file not found: ${this.templatePath} / .js`);
+            }
+
+            return newTemplatePath;
+        }
+
         return templatePath;
     }
 
