@@ -23,7 +23,12 @@ function readPluginsCommands(program) {
                 let packageName = file.substr(0, file.lastIndexOf("."));
                 packageName = packageName.substr(packageName.lastIndexOf("/") + 1);
 
-                let PluginClass = require(path.join(pluginsFolder, packageName)).plugin;
+                let PluginClass = require(path.join(pluginsFolder, packageName));
+
+                if (PluginClass.plugin) {
+                    PluginClass = PluginClass.plugin;
+                }
+
                 let instance = new PluginClass();
 
                 const consoleLog = new ConsoleLog();
