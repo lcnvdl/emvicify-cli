@@ -11,8 +11,8 @@ module.exports = {
             let finalLine = line;
 
             Object.keys(data).forEach(key => {
-                let k = `__${data}__`;
-                let kc = `__@${data}__`;
+                let k = `__${key}__`;
+                let kc = `__@${key}__`;
 
                 while (finalLine.indexOf(k) !== -1) {
                     finalLine = finalLine.replace(k, data[key]);
