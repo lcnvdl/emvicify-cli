@@ -9,7 +9,7 @@ Scaffolding tool for Emvicify
 ## Installation
 You can install the package from npm.
 ```bash
-npm i --g @emvicify/cli
+npm i -g @emvicify/cli
 ```
 
 ## Usage
