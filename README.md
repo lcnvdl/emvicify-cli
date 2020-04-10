@@ -77,3 +77,32 @@ mfy am --authentication basic --with-overrides Auth
 [npm-url]: https://npmjs.org/package/@emvicify/cli
 [travis-image]: https://img.shields.io/travis/lcnvdl/emvicify-cli/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/lcnvdl/emvicify-cli
+
+
+## FAQ
+### How can I add an express plugin?
+
+You can add a function called "configureAppBeforeServe" with your custom implementation.
+
+> Complete example
+```javascript
+const { start } = require("emvicify");
+const settingsFile = require("./settings.json");
+const expressSettings = {
+    bodyParserJson: true,
+    bodyParserUrlencoded: true,
+    bodyParserRaw: false
+};
+
+function configureAppBeforeServe(app, http) {
+    //  Extra express plugin
+    const cors = require("cors");
+    app.use(cors());
+}
+
+start(process.cwd(), settingsFile.port, { settingsFile, expressSettings, configureAppBeforeServe }).then(() => {
+    console.log(`Listening on port ${settingsFile.port}`);
+}, err => {
+    console.error("Application failed", err);
+});
+```
