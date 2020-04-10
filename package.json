@@ -1,6 +1,6 @@
 {
   "name": "@emvicify/cli",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "CLI for Emvicify Framework",
   "preferGlobal": true,
   "main": "index.js",
@@ -38,6 +38,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.0"
+    "mocha": "^7.1.1"
   }
 }
