@@ -5,8 +5,8 @@ class {{ className }}Router extends BaseRouter {
         super({ controllers, middlewares });
     }
 
-    register(app) {
-        // app.get("/", (req, res) => this.controllers.{{ className | decapitalize }}.getList({ req, res }));
+    registerActions() {
+        // this.app.get("/", (req, res) => this.controllers.{{ className | decapitalize }}.getList({ req, res }));
     }
 }
 
