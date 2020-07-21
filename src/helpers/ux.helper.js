@@ -5,7 +5,7 @@ module.exports = {
         colog.log(" ");
         colog.log(colog.bgBlue("                    "));
         colog.log(colog.colorBlue(colog.bgWhite("    EMVICIFY CLI    ")));
-        colog.log(colog.colorCyan(colog.bgBlue(" lucianorasente.com ")));
+        colog.log(colog.bgBlue("                    "));
         colog.log(" ");
     },
     
