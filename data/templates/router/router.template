@@ -6,7 +6,7 @@ class {{ className }}Router extends BaseRouter {
     }
 
     registerActions() {
-        this.app.get("{{ className | decapitalize }}/action", (req, res) => this.controllers.{{ className | decapitalize }}.action({ req, res }));
+        this.get("{{ className | decapitalize }}/action", (req, res) => this.controllers.{{ className | decapitalize }}.action({ req, res }));
     }
 }
 
