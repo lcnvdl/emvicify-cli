@@ -1,12 +1,12 @@
 const { BaseRouter } = require("emvicify/routers");
 
 class {{ className }}Router extends BaseRouter {
-    constructor({ controllers, middlewares }) {
-        super({ controllers, middlewares });
+    constructor({ settings, controllers, middlewares, routerSettings }) {
+        super({ settings, controllers, middlewares, routerSettings });
     }
 
     registerActions() {
-        // this.app.get("/", (req, res) => this.controllers.{{ className | decapitalize }}.getList({ req, res }));
+        this.app.get("{{ className | decapitalize }}/action", (req, res) => this.controllers.{{ className | decapitalize }}.action({ req, res }));
     }
 }
 
