@@ -1,6 +1,6 @@
-const { BaseRouter } = require("emvicify/routers");
+const { ExpressRouter } = require("emvicify/routers");
 
-class {{ className }}Router extends BaseRouter {
+class {{ className }}Router extends ExpressRouter {
     constructor({ settings, controllers, middlewares, routerSettings }) {
         super({ settings, controllers, middlewares, routerSettings });
     }
