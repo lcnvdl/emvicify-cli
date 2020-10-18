@@ -1,51 +1,56 @@
+/* eslint-disable global-require */
+/* eslint-disable import/no-dynamic-require */
 const fs = require("fs");
 const path = require("path");
-const ConsoleLog = require("./plugins/console-log");
 const inquirer = require("inquirer");
-const { present, goodbye } = require("../src/helpers/ux.helper");
+const ConsoleLog = require("./plugins/console-log");
+const { present, goodbye } = require("./helpers/ux.helper");
+const AbstractCommand = require("./cmd/base/abstract-command");
+const FileCommand = require("./cmd/base/file-command");
+
 const classes = {
-    AbstractCommand: require("../src/cmd/base/abstract-command"),
-    FileCommand: require("../src/cmd/base/file-command")
+  AbstractCommand,
+  FileCommand,
 };
 
 const methods = {
-    present, 
-    goodbye
+  present,
+  goodbye,
 };
 
 function readPluginsCommands(program) {
-    const pluginsFolder = path.join(process.cwd(), "app", "plugins");
+  const pluginsFolder = path.join(process.cwd(), "app", "plugins");
 
-    if (fs.existsSync(pluginsFolder)) {
-        let files = fs.readdirSync(pluginsFolder);
-        files.filter(file => file.indexOf(".js") !== -1).forEach(file => {
-            try {
-                let packageName = file.substr(0, file.lastIndexOf("."));
-                packageName = packageName.substr(packageName.lastIndexOf("/") + 1);
+  if (fs.existsSync(pluginsFolder)) {
+    const files = fs.readdirSync(pluginsFolder);
+    files.filter(file => file.indexOf(".js") !== -1).forEach(file => {
+      try {
+        let packageName = file.substr(0, file.lastIndexOf("."));
+        packageName = packageName.substr(packageName.lastIndexOf("/") + 1);
 
-                let PluginClass = require(path.join(pluginsFolder, packageName));
+        let PluginClass = require(path.join(pluginsFolder, packageName));
 
-                if (PluginClass.plugin) {
-                    PluginClass = PluginClass.plugin;
-                }
+        if (PluginClass.plugin) {
+          PluginClass = PluginClass.plugin;
+        }
 
-                let instance = new PluginClass();
+        const instance = new PluginClass();
 
-                const consoleLog = new ConsoleLog();
+        const consoleLog = new ConsoleLog();
 
-                if (instance.events && instance.events.commands) {
-                    instance.events.commands(program, { consoleLog, inquirer, classes, methods });
-                }
+        if (instance.events && instance.events.commands) {
+          instance.events.commands(program, { consoleLog, inquirer, classes, methods });
+        }
 
-                if (instance.events && instance.events.cli) {
-                    instance.events.cli(program, { consoleLog, inquirer, classes, methods });
-                }
-            }
-            catch (err) {
-                console.error("Error reading plugin " + file + ". " + err);
-            }
-        });
-    }
+        if (instance.events && instance.events.cli) {
+          instance.events.cli(program, { consoleLog, inquirer, classes, methods });
+        }
+      }
+      catch (err) {
+        console.error(`Error reading plugin ${file}. ${err}`);
+      }
+    });
+  }
 }
 
 module.exports = { readPluginsCommands };

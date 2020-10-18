@@ -1,29 +1,29 @@
 const colog = require("colog");
 
 class ConsoleLog {
-    info(a) {
-        colog.info(a);
-    }
+  info(a) {
+    colog.info(a);
+  }
 
-    log(a) {
-        colog.log(a);
-    }
+  log(a) {
+    colog.log(a);
+  }
 
-    success(a) {
-        colog.success(a);
-    }
+  success(a) {
+    colog.success(a);
+  }
 
-    warn(a) {
-        this.warning(a);
-    }
+  warn(a) {
+    this.warning(a);
+  }
 
-    warning(a) {
-        colog.warning(a);
-    }
+  warning(a) {
+    colog.warning(a);
+  }
 
-    error(a) {
-        colog.error(a);
-    }
+  error(a) {
+    colog.error(a);
+  }
 }
 
 module.exports = ConsoleLog;

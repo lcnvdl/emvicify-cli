@@ -7,43 +7,43 @@ Tangular.register("capitalize", capitalize);
 Tangular.register("decapitalize", decapitalize);
 
 class Template {
-    constructor({ path = null, content = null, data = {}, isJs = false }) {
-        this.content = content;
-        this.data = data;
-        this.isJs = isJs;
+  constructor({ path = null, content = null, data = {}, isJs = false }) {
+    this.content = content;
+    this.data = data;
+    this.isJs = isJs;
 
-        if (path) {
-            this.loadSync(path);
-        }
+    if (path) {
+      this.loadSync(path);
+    }
+  }
+
+  get isLoaded() {
+    return !!this.content;
+  }
+
+  loadSync(path) {
+    this.content = fs.readFileSync(path, "utf-8");
+  }
+
+  setData(key, value) {
+    this.data[key] = value;
+  }
+
+  render(renderAsJs) {
+    renderAsJs = (typeof renderAsJs !== "undefined") ? renderAsJs : this.isJs;
+
+    if (renderAsJs) {
+      return renderer.render(this.content, this.data);
     }
 
-    get isLoaded() {
-        return !!this.content;
+    let result = Tangular.render(this.content, this.data);
+
+    while (result.indexOf("&quot;") !== -1) {
+      result = result.replace("&quot;", "\"");
     }
 
-    loadSync(path) {
-        this.content = fs.readFileSync(path, "utf-8");
-    }
-
-    setData(key, value) {
-        this.data[key] = value;
-    }
-
-    render(renderAsJs) {
-        renderAsJs = (typeof renderAsJs !== 'undefined') ? renderAsJs : this.isJs;
-
-        if (renderAsJs) {
-            return renderer.render(this.content, this.data);
-        }
-
-        let result = Tangular.render(this.content, this.data);
-
-        while (result.indexOf("&quot;") !== -1) {
-            result = result.replace("&quot;", "\"");
-        }
-
-        return result;
-    }
+    return result;
+  }
 }
 
 module.exports = Template;

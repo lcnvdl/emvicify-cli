@@ -1,8 +1,15 @@
+const install = require("./cmd/install");
+const here = require("./cmd/here");
+const makeController = require("./cmd/make-controller");
+const makeRouter = require("./cmd/make-router");
+const makeMiddleware = require("./cmd/make-middleware");
+const makeService = require("./cmd/make-service");
+
 module.exports = {
-    install: require("./cmd/install"),
-    here: require("./cmd/here"),
-    makeController: require("./cmd/make-controller"),
-    makeRouter: require("./cmd/make-router"),
-    makeMiddleware: require("./cmd/make-middleware"),
-    makeService: require("./cmd/make-service")
+  install,
+  here,
+  makeController,
+  makeRouter,
+  makeMiddleware,
+  makeService,
 };
