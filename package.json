@@ -33,12 +33,12 @@
     "camelcase": "^5.3.1",
     "colog": "^1.0.4",
     "commander": "^2.20.0",
-    "inquirer": "^6.5.0",
+    "inquirer": "^7.3.3",
     "snake-case": "^2.1.0",
     "tangular": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.1.3"
+    "mocha": "^8.2.0"
   }
 }
