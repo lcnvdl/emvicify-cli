@@ -31,13 +31,7 @@ async function install(packageName, { saveDev = false }) {
 }
 
 function installMfyPlugin(packageName) {
-  let packageFriendlyName = packageName;
-
-  if (packageFriendlyName.startsWith("@") && packageFriendlyName.includes("/")) {
-    packageFriendlyName = packageFriendlyName.substr(packageFriendlyName.lastIndexOf("/") + 1).trim();
-  }
-
-  const packageDir = path.join(process.cwd(), "node_modules", packageFriendlyName);
+  const packageDir = path.join(process.cwd(), "node_modules", packageName);
   const packageJson = path.join(packageDir, "package.json");
 
   if (fs.existsSync(packageJson)) {
@@ -49,7 +43,11 @@ function installMfyPlugin(packageName) {
       const pluginsDir = path.join(process.cwd(), "app", "plugins");
       fs.mkdirSync(pluginsDir, { recursive: true });
 
-      const PluginClass = require(path.join(packageDir, "index")).plugin;
+      let PluginClass = require(path.join(packageDir, "index"));
+      if (PluginClass.plugin) {
+        PluginClass = PluginClass.plugin;
+      }
+
       const instance = new PluginClass();
 
       if (instance.events && instance.events.install) {
