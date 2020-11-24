@@ -31,7 +31,13 @@ async function install(packageName, { saveDev = false }) {
 }
 
 function installMfyPlugin(packageName) {
-  const packageDir = path.join(process.cwd(), "node_modules", packageName);
+  let packageFriendlyName = packageName;
+
+  if (packageFriendlyName.startsWith("@") && packageFriendlyName.includes("/")) {
+    packageFriendlyName = packageFriendlyName.substr(packageFriendlyName.lastIndexOf("/") + 1).trim();
+  }
+
+  const packageDir = path.join(process.cwd(), "node_modules", packageFriendlyName);
   const packageJson = path.join(packageDir, "package.json");
 
   if (fs.existsSync(packageJson)) {
