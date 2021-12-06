@@ -1,6 +1,6 @@
 {
   "name": "@emvicify/cli",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "description": "CLI for Emvicify Framework",
   "preferGlobal": true,
   "main": "index.js",
@@ -32,17 +32,17 @@
   "dependencies": {
     "camelcase": "^5.3.1",
     "colog": "^1.0.4",
-    "commander": "^2.20.0",
-    "inquirer": "^7.3.3",
+    "commander": "^8.3.0",
+    "inquirer": "^8.2.0",
     "snake-case": "^2.1.0",
     "tangular": "^2.0.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-chai-friendly": "^0.6.0",
     "eslint-plugin-import": "^2.22.1",
-    "mocha": "^8.2.0"
+    "mocha": "^9.1.3"
   }
 }
